@@ -2,19 +2,22 @@ const Apikey = "b560b6bd642e46b7985f4dd8424aa9c8";
 const Url = "https://newsapi.org/v2/everything?q=";
 
 async function fetchData(Query) {
+  // fetching the data from api
   const res = await fetch(`${Url}${Query}&apiKey=${Apikey}`);
   const data = await res.json();
   return data;
 }
 
+// default it fetching all types of data
 fetchData("all").then(data=>renderNewsCard(data.articles));
 
+// creating the card according to the serch result number
 function renderNewsCard(arr) {
   let cardWrapper = document.querySelector(".card-parent");
   let mainhtml = "";
   for (let i = 0; i < arr.length; i++) {
     mainhtml += `<div class="card" style="width: 24rem;">
-        <img src="${arr[i].urlToImage}" style="margin-top: .6rem;" class="card-img-top" alt="..." />
+        <img src="${arr[i].urlToImage}" style="margin-top: .6rem;" class="card-img" alt="..." />
         <div class="card-body">
           <h5 class="card-title">
             ${arr[i].title}
